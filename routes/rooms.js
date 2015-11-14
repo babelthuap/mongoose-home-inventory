@@ -67,11 +67,11 @@ router.delete('/:id', (req, res) => {
 });
 
 
-// add a room
+// add a room & send back its mongoId
 router.post('/', (req, res) => {
   let room = new Room(req.body);
   room.save((err, storedRoom) => {
-    res.status(err ? 400 : 200).send(err || `added: ${storedRoom}`);
+    res.status(err ? 400 : 200).send(err || storedRoom._id);
   });
 });
 

@@ -15,28 +15,35 @@ html(lang="en")
             | by 
             a(href="https://babelthuap.github.io/") Nicholas Neumann-Chun
         hr
-        each room in rooms
-          .row.room(data-mongoid= room._id)
-            h3= room.name + ' '
-              i.fa.fa-caret-up
-            .items
-              table.table
-                thead
-                  th Item
-                  th Value
-                  th Description
-                tbody
-                  each item in room.items
+        #rooms
+          each room in rooms
+            .row.room(data-mongoid= room._id)
+              h3
+                i.fa.fa-trash-o
+                span &nbsp;&nbsp;&nbsp;&nbsp;
+                span.roomName= room.name
+                span &nbsp;
+                i.arrow.fa.fa-caret-up
+              .items
+                table.table
+                  thead
+                    th Item
+                    th Value
+                    th Description
+                  tbody
+                    each item in room.items
+                      tr
+                        td= item.name 
+                        td= '$' + (+item.value).toFixed(2)
+                        td= item.description
                     tr
-                      td= item.name 
-                      td= '$' + (+item.value).toFixed(2)
-                      td= item.description
-                  tr
-                    td: input.newName(type="text")
-                    td: input.newValue(type="text")
-                    td: input.newDescription(type="text")
-              button.addItem.btn.btn-danger Add Item
+                      td: input.newName(type="text")
+                      td: input.newValue(type="text")
+                      td: input.newDescription(type="text")
+                button.addItem.btn.btn-danger Add Item
         center
+          input#newRoomName(type="text")
+          br
           button#addRoom.btn.btn-lg.btn-danger Add New Room
     script(src='bower_components/jquery/dist/jquery.min.js')
     script(src="js/main.js")

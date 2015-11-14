@@ -1,12 +1,11 @@
 {
-  "name": "expresstest",
+  "name": "mongoose-home-inventory",
   "description": "",
   "main": "app.js",
   "authors": [
     "Nicholas Neumann-Chun"
   ],
   "license": "ISC",
-  "homepage": "https://github.com/cadenichols/express-sample",
   "moduleType": [],
   "ignore": [
     "**/.*",

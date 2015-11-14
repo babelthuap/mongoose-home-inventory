@@ -10,7 +10,7 @@ a:hover {
   color: #d43f3a;
 }
 
-.container .jumbotron {
+body, .container .jumbotron {
   background-color: #4B40A5;
 }
 
@@ -21,7 +21,7 @@ a:hover {
   padding: 16px;
   padding-top: 0px;
   background-color: white;
-  box-shadow: 4px 4px 3px rgba(0,0,0,0.3);
+  box-shadow: 4px 8px 3px rgba(0,0,0,0.6);
 }
 
 .items {
@@ -29,10 +29,16 @@ a:hover {
   display: none;
 }
 
-h3 {
+.fa-trash-o, .roomName {
   cursor: pointer;
 }
 
-#addRoom {
+.fa-trash-o {
+  opacity: 0.6;
+}
+
+#newRoomName {
   margin-top: 32px;
+  margin-bottom: 8px;
+  padding: 4px;
 }

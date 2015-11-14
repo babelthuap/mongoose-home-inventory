@@ -2,13 +2,36 @@
 
 $(document).ready(function() {
 
-  $('h3').click(function() {
-    $(this).siblings('.items').slideToggle();
-    $(this).find('.fa').toggleClass('fa-caret-up').toggleClass('fa-caret-down');
+  $('.roomName').click(function() {
+    console.log($(this))
+    $(this).closest('h3').siblings('.items').slideToggle();
+    $(this).siblings('.arrow').toggleClass('fa-caret-up').toggleClass('fa-caret-down');
   });
+  $('.fa-trash-o').click(removeRoom);
 
   $('.container').on('click', '.addItem', addItem);
   $('#addRoom').click(addRoom);
+  $('#newRoomName').on('keypress', function(e) {
+    if (e.keyCode === 13) addRoom();
+  });
+
+  function addRoom() {
+    var name = $('#newRoomName').val();
+    if (!name) return;
+    $('#newRoomName').val('');
+
+    $.post('/rooms', {name: name})
+    .done(function(roomId) {
+      location.reload(true);
+    })
+    .fail(function(err) {
+      console.log('add new room failed:', err);
+    });
+  }
+
+  function removeRoom() {
+    console.log('remove', $(this).siblings('.roomName').text() );
+  }
 
   function addItem() {
     var $table = $(this).siblings('table'),
@@ -50,9 +73,4 @@ $(document).ready(function() {
 
     }
   };
-
-  function addRoom() {
-    console.log('ADD NEW ROOM');
-  }
-
 });
