@@ -3,11 +3,11 @@
 $(document).ready(function() {
 
   $('.roomName').click(function() {
-    console.log($(this))
     $(this).closest('h3').siblings('.items').slideToggle();
     $(this).siblings('.arrow').toggleClass('fa-caret-up').toggleClass('fa-caret-down');
   });
   $('.fa-trash-o').click(removeRoom);
+  $('.remove-item').click(removeItem)
 
   $('.container').on('click', '.addItem', addItem);
   $('#addRoom').click(addRoom);
@@ -43,6 +43,23 @@ $(document).ready(function() {
     })
     .fail(function(err) {
       console.log('remove room failed:', err);
+    });
+  }
+
+  function removeItem() {
+    var $item = $(this).closest('tr');
+    var itemId = $item.data('mongoid').slice(1, -1);
+
+    $.ajax({
+      method: 'DELETE',
+      url: `/items/${itemId}`
+    })
+    .done(function() {
+      console.log('remove item successful');
+      $item.remove();
+    })
+    .fail(function(err) {
+      console.log('remove item failed:', err);
     });
   }
 

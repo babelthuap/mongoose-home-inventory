@@ -30,16 +30,19 @@ html(lang="en")
                     th Item
                     th Value
                     th Description
+                    th Remove
                   tbody
                     each item in room.items
-                      tr
+                      tr(data-mongoid= item._id)
                         td= item.name 
                         td= '$' + (+item.value).toFixed(2)
                         td= item.description
+                        td: button.btn.btn-default.fa.fa-times.remove-item
                     tr
                       td: input.newName(type="text")
                       td: input.newValue(type="text")
                       td: input.newDescription(type="text")
+                      td
                 button.addItem.btn.btn-danger Add Item
         center
           input#newRoomName(type="text")
