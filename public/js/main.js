@@ -4,10 +4,10 @@ $(document).ready(function() {
 
   $('.roomName').click(function() {
     $(this).closest('h3').siblings('.items').slideToggle();
-    $(this).siblings('.arrow').toggleClass('fa-caret-up').toggleClass('fa-caret-down');
+    $(this).siblings('.arrow').toggleClass('fa-caret-up fa-caret-down');
   });
   $('.fa-trash-o').click(removeRoom);
-  $('.remove-item').click(removeItem)
+  $('.items').on('click', '.remove-item', removeItem)
 
   $('.container').on('click', '.addItem', addItem);
   $('#addRoom').click(addRoom);
@@ -35,9 +35,6 @@ $(document).ready(function() {
       method: 'DELETE',
       url: `/rooms/${roomId}`
     })
-    .done(function() {
-      console.log('remove room successful');
-    })
     .fail(function(err) {
       console.log('remove room failed:', err);
     });
@@ -52,7 +49,6 @@ $(document).ready(function() {
       url: `/items/${itemId}`
     })
     .done(function() {
-      console.log('remove item successful');
       $item.remove();
     })
     .fail(function(err) {
@@ -84,10 +80,12 @@ $(document).ready(function() {
         })
         .done(function() {
           // display new item on the page
-          var $newItem = $('<tr>');
+          var $button = $('<button>').addClass('btn btn-default fa fa-times remove-item');
+          var $newItem = $('<tr>').data('mongoid', `"${itemId}"`);
           $newItem.append( $('<td>').text(name) )
                   .append( $('<td>').text('$' + value.toFixed(2)) )
-                  .append( $('<td>').text(description) );
+                  .append( $('<td>').text(description) )
+                  .append( $('<td>').append($button) )
           $table.find('tr').last().before( $newItem );
         })
         .fail(function(err) {
