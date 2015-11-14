@@ -11,9 +11,6 @@ $(document).ready(function() {
 
   $('.container').on('click', '.addItem', addItem);
   $('#addRoom').click(addRoom);
-  $('#newRoomName').on('keypress', function(e) {
-    if (e.keyCode === 13) addRoom();
-  });
 
   function addRoom() {
     var name = $('#newRoomName').val();
@@ -69,7 +66,9 @@ $(document).ready(function() {
         name = $table.find('.newName').val(),
         value = Number( $table.find('.newValue').val().replace('$', '') ),
         description = $table.find('.newDescription').val();
-    
+
+    $table.find('input').val('');
+
     if (name && value) {
       // add item to collection of items
       $.ajax({
@@ -90,7 +89,6 @@ $(document).ready(function() {
                   .append( $('<td>').text('$' + value.toFixed(2)) )
                   .append( $('<td>').text(description) );
           $table.find('tr').last().before( $newItem );
-          $table.find('input').val('');
         })
         .fail(function(err) {
           console.log('add item to room failed:', err.responseText)
