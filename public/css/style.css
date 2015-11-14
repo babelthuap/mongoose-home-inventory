@@ -1,0 +1,17 @@
+.room {
+  border: 1px solid #000;
+  border-radius: 6px;
+  margin-top: 16px;
+  padding: 16px;
+  padding-top: 0px;
+  background-color: white;
+}
+
+.items {
+  margin-left: 16px;
+  display: none;
+}
+
+h3 {
+  cursor: pointer;
+}
