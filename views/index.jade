@@ -9,7 +9,7 @@ html(lang="en")
     .container
       br
       .jumbotron
-        center
+        center#header
           h1 Home Inventory
           em
             | by 
@@ -35,6 +35,8 @@ html(lang="en")
                     td: input.newName(type="text")
                     td: input.newValue(type="text")
                     td: input.newDescription(type="text")
-              button.addItem.btn.btn-primary Add Item
+              button.addItem.btn.btn-danger Add Item
+        center
+          button#addRoom.btn.btn-lg.btn-danger Add New Room
     script(src='bower_components/jquery/dist/jquery.min.js')
     script(src="js/main.js")

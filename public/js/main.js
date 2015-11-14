@@ -8,18 +8,16 @@ $(document).ready(function() {
   });
 
   $('.container').on('click', '.addItem', addItem);
+  $('#addRoom').click(addRoom);
 
   function addItem() {
-
     var $table = $(this).siblings('table'),
         roomId = $(this).closest('.room').data('mongoid').slice(1, -1),
         name = $table.find('.newName').val(),
-        value = $table.find('.newValue').val(),
+        value = Number( $table.find('.newValue').val().replace('$', '') ),
         description = $table.find('.newDescription').val();
     
     if (name && value) {
-      console.log('new item:', name, value, description, ' _id:', roomId);
-
       // add item to collection of items
       $.ajax({
         method: 'POST',
@@ -36,7 +34,7 @@ $(document).ready(function() {
           // display new item on the page
           var $newItem = $('<tr>');
           $newItem.append( $('<td>').text(name) )
-                  .append( $('<td>').text(value) )
+                  .append( $('<td>').text('$' + value.toFixed(2)) )
                   .append( $('<td>').text(description) );
           $table.find('tr').last().before( $newItem );
           $table.find('input').val('');
@@ -52,5 +50,9 @@ $(document).ready(function() {
 
     }
   };
+
+  function addRoom() {
+    console.log('ADD NEW ROOM');
+  }
 
 });
