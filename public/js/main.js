@@ -18,7 +18,7 @@ $(document).ready(function() {
   function addRoom() {
     var name = $('#newRoomName').val();
     if (!name) return;
-    $('#newRoomName').val('');
+    $('*').off('click');
 
     $.post('/rooms', {name: name})
     .done(function(roomId) {
@@ -30,7 +30,20 @@ $(document).ready(function() {
   }
 
   function removeRoom() {
-    console.log('remove', $(this).siblings('.roomName').text() );
+    var $room = $(this).closest('.room');
+    var roomId = $room.data('mongoid').slice(1, -1);
+    $room.remove();
+
+    $.ajax({
+      method: 'DELETE',
+      url: `/rooms/${roomId}`
+    })
+    .done(function() {
+      console.log('remove room successful');
+    })
+    .fail(function(err) {
+      console.log('remove room failed:', err);
+    });
   }
 
   function addItem() {
