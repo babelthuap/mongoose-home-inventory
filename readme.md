@@ -1,3 +1,5 @@
-# Express Example
+# Home Inventory
 
-First, cd into the project directory, and do `npm run setup` to install the dependencies listed in the package.json and bower.json.  Then you can start the server in Node.
+*by Nicholas Neumann-Chun*
+
+Uses a Mongo database (via mongoose) to organize the user's possessions into rooms.
